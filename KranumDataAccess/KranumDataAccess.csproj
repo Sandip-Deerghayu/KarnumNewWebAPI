@@ -1,0 +1,648 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\KranumWebApi\packages\Microsoft.Extensions.FileProviders.Embedded.2.1.0\build\netstandard2.0\Microsoft.Extensions.FileProviders.Embedded.props" Condition="Exists('..\KranumWebApi\packages\Microsoft.Extensions.FileProviders.Embedded.2.1.0\build\netstandard2.0\Microsoft.Extensions.FileProviders.Embedded.props')" />
+  <Import Project="..\KranumWebApi\packages\Microsoft.EntityFrameworkCore.Design.3.1.32\build\net461\Microsoft.EntityFrameworkCore.Design.props" Condition="Exists('..\KranumWebApi\packages\Microsoft.EntityFrameworkCore.Design.3.1.32\build\net461\Microsoft.EntityFrameworkCore.Design.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{904FC388-614B-4D72-B07F-30078437D083}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KranumDataAccess</RootNamespace>
+    <AssemblyName>KranumDataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\AutoMapper.6.2.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Castle.Core.4.4.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Authentication.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Authentication.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Authentication.Core.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Authorization.2.1.0\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization.Policy, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Authorization.Policy.2.1.0\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.Policy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Cryptography.Internal, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Cryptography.Internal.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Cryptography.Internal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.DataProtection, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.DataProtection.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.DataProtection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.DataProtection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.DataProtection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.DataProtection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Hosting.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Hosting.Server.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Http.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Http.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Extensions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Http.Extensions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Http.Features.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Abstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Mvc.Abstractions.2.1.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.ApiExplorer, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Mvc.ApiExplorer.2.1.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.ApiExplorer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Mvc.Core.2.1.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.DataAnnotations, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Mvc.DataAnnotations.2.1.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.DataAnnotations.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.ResponseCaching.Abstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.ResponseCaching.Abstractions.2.1.0\lib\netstandard2.0\Microsoft.AspNetCore.ResponseCaching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Routing.2.1.0\lib\netstandard2.0\Microsoft.AspNetCore.Routing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing.Abstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.Routing.Abstractions.2.1.0\lib\netstandard2.0\Microsoft.AspNetCore.Routing.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.StaticFiles, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.StaticFiles.2.1.0\lib\netstandard2.0\Microsoft.AspNetCore.StaticFiles.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNetCore.WebUtilities.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.SqlClient, Version=1.13.20136.2, Culture=neutral, PublicKeyToken=23ec7fc2d6eaa4a5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.SqlClient.1.1.4\lib\net46\Microsoft.Data.SqlClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.DotNet.PlatformAbstractions.2.1.0\lib\net45\Microsoft.DotNet.PlatformAbstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore, Version=3.1.32.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.EntityFrameworkCore.3.1.32\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Abstractions, Version=3.1.32.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.EntityFrameworkCore.Abstractions.3.1.32\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Design, Version=3.1.32.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.EntityFrameworkCore.Design.3.1.32\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Proxies, Version=3.1.32.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.EntityFrameworkCore.Proxies.3.1.32\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Proxies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Relational, Version=3.1.32.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.EntityFrameworkCore.Relational.3.1.32\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.SqlServer, Version=3.1.31.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.EntityFrameworkCore.SqlServer.3.1.31\lib\netstandard2.0\Microsoft.EntityFrameworkCore.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=3.1.32.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.Caching.Abstractions.3.1.32\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=3.1.32.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.Caching.Memory.3.1.32\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=3.1.32.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.Configuration.3.1.32\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=3.1.32.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.Configuration.Abstractions.3.1.32\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=3.1.32.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.Configuration.Binder.3.1.32\lib\netstandard2.0\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=3.1.32.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.DependencyInjection.3.1.32\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=6.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.DependencyInjection.Abstractions.6.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyModel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.DependencyModel.2.1.0\lib\net451\Microsoft.Extensions.DependencyModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.FileProviders.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Embedded, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.FileProviders.Embedded.2.1.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Embedded.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.Hosting.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Localization, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.Localization.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Localization.Abstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.Localization.Abstractions.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Localization.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=3.1.32.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.Logging.3.1.32\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=3.1.32.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.Logging.Abstractions.3.1.32\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.ObjectPool, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.ObjectPool.2.2.0\lib\netstandard2.0\Microsoft.Extensions.ObjectPool.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=3.1.32.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.Options.3.1.32\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=3.1.32.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.Primitives.3.1.32\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.WebEncoders, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Extensions.WebEncoders.2.2.0\lib\netstandard2.0\Microsoft.Extensions.WebEncoders.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client, Version=3.0.8.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Identity.Client.3.0.8\lib\net45\Microsoft.Identity.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.5.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.5.0\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.5.5.0\lib\net461\Microsoft.IdentityModel.Protocols.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.5.5.0\lib\net461\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.5.0\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Net.Http.Headers.2.2.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.OpenApi, Version=1.6.2.0, Culture=neutral, PublicKeyToken=3f5743946376f042, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.OpenApi.1.6.2\lib\netstandard2.0\Microsoft.OpenApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage, Version=9.3.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\WindowsAzure.Storage.9.3.3\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Swashbuckle.AspNetCore.Swagger, Version=6.5.0.0, Culture=neutral, PublicKeyToken=62657d7474907593, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Swashbuckle.AspNetCore.Swagger.6.5.0\lib\netstandard2.0\Swashbuckle.AspNetCore.Swagger.dll</HintPath>
+    </Reference>
+    <Reference Include="Swashbuckle.AspNetCore.SwaggerGen, Version=6.5.0.0, Culture=neutral, PublicKeyToken=d84d99fb0135530a, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Swashbuckle.AspNetCore.SwaggerGen.6.5.0\lib\netstandard2.0\Swashbuckle.AspNetCore.SwaggerGen.dll</HintPath>
+    </Reference>
+    <Reference Include="Swashbuckle.AspNetCore.SwaggerUI, Version=6.5.0.0, Culture=neutral, PublicKeyToken=4232c99127b3c254, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Swashbuckle.AspNetCore.SwaggerUI.6.5.0\lib\netstandard2.0\Swashbuckle.AspNetCore.SwaggerUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Swashbuckle.Core.5.6.0\lib\net40\Swashbuckle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\System.Collections.Immutable.1.7.1\lib\net461\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.5.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Xml, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\System.Security.Cryptography.Xml.4.5.0\lib\net461\System.Security.Cryptography.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.4.5.0\lib\net461\System.Security.Permissions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.5.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.6.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.4.6.0\lib\net461\System.Text.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\KranumWebApi\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\SwaggerConfig.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Models\AbnormalityTypeForAppendageForCareClientPulseOxygenInformation.cs" />
+    <Compile Include="Models\AbnormalTypeForMindSituationForReadingSpecificsForPulse.cs" />
+    <Compile Include="Models\AbnormalTypeForMindSituationForReadingSpecificsForRespirations.cs" />
+    <Compile Include="Models\AbnormalTypeForSituationForReadingSpecificsForTemperature.cs" />
+    <Compile Include="Models\ActivityPain.cs" />
+    <Compile Include="Models\AdlQuestionMapping.cs" />
+    <Compile Include="Models\AgencyFormBuilder.cs" />
+    <Compile Include="Models\AgencyHolidayCallTypeMapping.cs" />
+    <Compile Include="Models\AgencyHolidayRates.cs" />
+    <Compile Include="Models\AgencyHolidays.cs" />
+    <Compile Include="Models\AgencyInteraction.cs" />
+    <Compile Include="Models\AgencyInteractionMapping.cs" />
+    <Compile Include="Models\AgencyLocations.cs" />
+    <Compile Include="Models\AgencyMilesRate.cs" />
+    <Compile Include="Models\AgencyMilesRateWithCallType.cs" />
+    <Compile Include="Models\AgencyOnCallInformation.cs" />
+    <Compile Include="Models\AgencyOnCallInformationMappingLocation.cs" />
+    <Compile Include="Models\AgencyOverTimeRule.cs" />
+    <Compile Include="Models\AgencyPaymentEmailId.cs" />
+    <Compile Include="Models\AgencyPlanDetail.cs" />
+    <Compile Include="Models\AgencyRecurrence.cs" />
+    <Compile Include="Models\AgencyRoidata.cs" />
+    <Compile Include="Models\AgencySettings.cs" />
+    <Compile Include="Models\AideHousekeepingTaskScheduleMappingCareClientTaskInformationForEnvironment.cs" />
+    <Compile Include="Models\AideLaundaryTaskScheduleMappingCareClientTaskInformationForEnvironment.cs" />
+    <Compile Include="Models\AideNameListForSatisfactionOfSupervisory.cs" />
+    <Compile Include="Models\AideNameMappingSatisfactionInformation.cs" />
+    <Compile Include="Models\Alerts.cs" />
+    <Compile Include="Models\AlertsAssessmentDates.cs" />
+    <Compile Include="Models\AmbulationEmployeeEvalutionInformatiom.cs" />
+    <Compile Include="Models\AndroidAppVersionForCarehub.cs" />
+    <Compile Include="Models\AndroidAppVersionForRegruit.cs" />
+    <Compile Include="Models\AndroidAppVersions.cs" />
+    <Compile Include="Models\AndroidAppVersionsForRelyfyNotes.cs" />
+    <Compile Include="Models\AppendageTypeForReadingSpecificsForPulseOxygen.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\AppointmentActivity.cs" />
+    <Compile Include="Models\AppointmentConfirmation.cs" />
+    <Compile Include="Models\AppointmentMedicationMapping.cs" />
+    <Compile Include="Models\Appointments.cs" />
+    <Compile Include="Models\AppointmentsNurseApproval.cs" />
+    <Compile Include="Models\AppointmentsRequest.cs" />
+    <Compile Include="Models\AssessorPayrollTerms.cs" />
+    <Compile Include="Models\AssessorScreenList.cs" />
+    <Compile Include="Models\AssessorScreenMappingLevel.cs" />
+    <Compile Include="Models\AssessorScrrenListMappingMandatoryQues.cs" />
+    <Compile Include="Models\AssignForms.cs" />
+    <Compile Include="Models\BenefitLinksForApp.cs" />
+    <Compile Include="Models\BillPayRateChangeLog.cs" />
+    <Compile Include="Models\BodyTemperatureWaysForReadingSpecificsForTemperature.cs" />
+    <Compile Include="Models\BusinessContactCounty.cs" />
+    <Compile Include="Models\BusinessContactInformation.cs" />
+    <Compile Include="Models\BusinessContactInformationCopy.cs" />
+    <Compile Include="Models\BusinessContactInformationLatestCanary.cs" />
+    <Compile Include="Models\BusinessContactMappingFbPost.cs" />
+    <Compile Include="Models\BusinessContactMappingFbPostLatestCanary.cs" />
+    <Compile Include="Models\BusinessContactMappingService.cs" />
+    <Compile Include="Models\BusinessContactMappingServiceLatestCanary.cs" />
+    <Compile Include="Models\BusinessContactMappingTag.cs" />
+    <Compile Include="Models\BusinessContactMappingTagLatestCanary.cs" />
+    <Compile Include="Models\BusinessContactMappingWebsiteText.cs" />
+    <Compile Include="Models\BusinessContactMappingWebsiteTextLatestCanary.cs" />
+    <Compile Include="Models\BusinessIndeedJobData.cs" />
+    <Compile Include="Models\BusinessInteraction.cs" />
+    <Compile Include="Models\BusinessLabelList.cs" />
+    <Compile Include="Models\BusinessMailInteraction.cs" />
+    <Compile Include="Models\BusinessMappingCountyServed.cs" />
+    <Compile Include="Models\BusinessMappingLabel.cs" />
+    <Compile Include="Models\BusinessMappingStateServed.cs" />
+    <Compile Include="Models\BusinessOtherContact.cs" />
+    <Compile Include="Models\BusinessOtherContactLatestCanary.cs" />
+    <Compile Include="Models\BusinessScoringCriteria.cs" />
+    <Compile Include="Models\BusinessServiceTags.cs" />
+    <Compile Include="Models\CallType.cs" />
+    <Compile Include="Models\CancelAppointments.cs" />
+    <Compile Include="Models\CareBusinessForumLeads.cs" />
+    <Compile Include="Models\CareBusinessForumQuestionList.cs" />
+    <Compile Include="Models\CareBusinessForumQuestionMappingAnswer.cs" />
+    <Compile Include="Models\CareBusinessForumQuestionMappingOption.cs" />
+    <Compile Include="Models\CareBusinessForumQuestionMappingOptionCopy.cs" />
+    <Compile Include="Models\CareBusinessForumQuestionMappingSubOption.cs" />
+    <Compile Include="Models\CareBusinessForumUpdatedInfo.cs" />
+    <Compile Include="Models\CareClientAdvanceDirectiveInformation.cs" />
+    <Compile Include="Models\CareClientAdvanceDirectiveMappingDocument.cs" />
+    <Compile Include="Models\CareClientAllergyInformation.cs" />
+    <Compile Include="Models\CareClientAllergyMappingQue.cs" />
+    <Compile Include="Models\CareClientAndNurseSignature.cs" />
+    <Compile Include="Models\CareClientAppearance.cs" />
+    <Compile Include="Models\CareClientAttchments.cs" />
+    <Compile Include="Models\CareClientBloodPressureInformation.cs" />
+    <Compile Include="Models\CareClientBloodPressureMappingAbnormality.cs" />
+    <Compile Include="Models\CareClientCardiovascularInformation.cs" />
+    <Compile Include="Models\CareClientCardiovascularInformationMappingHeartSound.cs" />
+    <Compile Include="Models\CareClientCardiovascularInformationMappingLimitation.cs" />
+    <Compile Include="Models\CareClientCardiovascularInformationMappingShortnessOfBreathWithActivity.cs" />
+    <Compile Include="Models\CareClientCardiovascularInformationMappingShortnessOfBreathWithoutActivity.cs" />
+    <Compile Include="Models\CareClientCarePlan.cs" />
+    <Compile Include="Models\CareClientConnectLogin.cs" />
+    <Compile Include="Models\CareClientContactInformation.cs" />
+    <Compile Include="Models\CareClientContactInformationCopy.cs" />
+    <Compile Include="Models\CareClientContactInformationOld.cs" />
+    <Compile Include="Models\CareClientDiagnosis.cs" />
+    <Compile Include="Models\CareClientDiagnosisMappig.cs" />
+    <Compile Include="Models\CareClientDiegestionMouthInformationMappingLimitation.cs" />
+    <Compile Include="Models\CareClientDigestionGastrointestinalInformation.cs" />
+    <Compile Include="Models\CareClientDigestionGastrointestinalInformationMappingLimitation.cs" />
+    <Compile Include="Models\CareClientDigestionGenitourinaryBladderIncontinenceLimitation.cs" />
+    <Compile Include="Models\CareClientDigestionGenitourinaryInformation.cs" />
+    <Compile Include="Models\CareClientDigestionGenitourinaryInformationMappingLimitation.cs" />
+    <Compile Include="Models\CareClientDigestionMouthDenturesLimitation.cs" />
+    <Compile Include="Models\CareClientDigestionMouthInformation.cs" />
+    <Compile Include="Models\CareClientDisasterInformation.cs" />
+    <Compile Include="Models\CareClientDischargeInformation.cs" />
+    <Compile Include="Models\CareClientEarsInformation.cs" />
+    <Compile Include="Models\CareClientEarsInformationMappingLimitation.cs" />
+    <Compile Include="Models\CareClientEventsInformation.cs" />
+    <Compile Include="Models\CareClientEyesInformaion.cs" />
+    <Compile Include="Models\CareClientEyesInformationMappingEyesLimitations.cs" />
+    <Compile Include="Models\CareClientGeneralPainInformation.cs" />
+    <Compile Include="Models\CareClientGlucoseInformation.cs" />
+    <Compile Include="Models\CareClientGlucoseInformationMappingTestingPerformBy.cs" />
+    <Compile Include="Models\CareClientGlucoseMappingGlucoseManagedBy.cs" />
+    <Compile Include="Models\CareClientGoalsInformation.cs" />
+    <Compile Include="Models\CareClientGoalsInformationMappingPhotos.cs" />
+    <Compile Include="Models\CareClientHeadNeckInformation.cs" />
+    <Compile Include="Models\CareClientHeadNeckInformationMappingLimitation.cs" />
+    <Compile Include="Models\CareClientHolidayStatus.cs" />
+    <Compile Include="Models\CareClientImportantInformation.cs" />
+    <Compile Include="Models\CareClientInformationForPolici.cs" />
+    <Compile Include="Models\CareClientInformationForPoliciesMappingPoliciesForConsents.cs" />
+    <Compile Include="Models\CareClientInteractionDetails.cs" />
+    <Compile Include="Models\CareClientMappingService.cs" />
+    <Compile Include="Models\CaryfySupportEmail.cs" />
+    <Compile Include="Models\City.cs" />
+    <Compile Include="Models\ClientContactPerson.cs" />
+    <Compile Include="Models\ClientContactPersonCopy.cs" />
+    <Compile Include="Models\ClientLocations.cs" />
+    <Compile Include="Models\Clients.cs" />
+    <Compile Include="Models\CustomerContactMappingTag.cs" />
+    <Compile Include="Models\CustomerInteraction.cs" />
+    <Compile Include="Models\CustomerMailInteraction.cs" />
+    <Compile Include="Models\DashBoardManagement.cs" />
+    <Compile Include="Models\DataScrapAgency.cs" />
+    <Compile Include="Models\DataScrapeProcess.cs" />
+    <Compile Include="Models\DossierRequest.cs" />
+    <Compile Include="Models\DossierRequestMappingNextlinkEmail.cs" />
+    <Compile Include="Models\EmailAnalystFromExcel.cs" />
+    <Compile Include="Models\EmailCampaignMappingTemplate.cs" />
+    <Compile Include="Models\EmailTemplate.cs" />
+    <Compile Include="Models\EmployeeAvailability.cs" />
+    <Compile Include="Models\EmployeeBusinessAccess.cs" />
+    <Compile Include="Models\EmployeeBusinessAccessMappingCounty.cs" />
+    <Compile Include="Models\EmployeeBusinessAccessMappingProduct.cs" />
+    <Compile Include="Models\EmployeeBusinessAccessMappingService.cs" />
+    <Compile Include="Models\EmployeeBusinessAccessMappingState.cs" />
+    <Compile Include="Models\EmployeeFavouriteItem.cs" />
+    <Compile Include="Models\EmployeeFavouriteItemLog.cs" />
+    <Compile Include="Models\EmployeeOtherContact.cs" />
+    <Compile Include="Models\Employees.cs" />
+    <Compile Include="Models\EmpoyeeFeatureMapping.cs" />
+    <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\EventEmailSent.cs" />
+    <Compile Include="Models\EventKindBusinessData.cs" />
+    <Compile Include="Models\EventKindUserDetail.cs" />
+    <Compile Include="Models\EventKindUserLoggedInDetails.cs" />
+    <Compile Include="Models\EventOrganizer.cs" />
+    <Compile Include="Models\EventParticipant.cs" />
+    <Compile Include="Models\EvvinfoMappingState.cs" />
+    <Compile Include="Models\ExceptionLog.cs" />
+    <Compile Include="Models\FeatureEmployeeMapping.cs" />
+    <Compile Include="Models\FeatureRoleMappings.cs" />
+    <Compile Include="Models\Features.cs" />
+    <Compile Include="Models\FirstDemoInteraction.cs" />
+    <Compile Include="Models\FirstDemoInteractionMappingKeyObjective.cs" />
+    <Compile Include="Models\FirstDemoQuestion.cs" />
+    <Compile Include="Models\FirstDemoQuestionMappingAnswer.cs" />
+    <Compile Include="Models\FirstDemoQuestionMappingPayer.cs" />
+    <Compile Include="Models\FirstDemoQuestionMappingPriorityAnswer.cs" />
+    <Compile Include="Models\Franchise.cs" />
+    <Compile Include="Models\FranchiseNameList.cs" />
+    <Compile Include="Models\FromEmailForTemplate.cs" />
+    <Compile Include="Models\IgnoreTextList.cs" />
+    <Compile Include="Models\ImportBusinessData.cs" />
+    <Compile Include="Models\ImportBusinessFbPosts.cs" />
+    <Compile Include="Models\ImportWebSiteText.cs" />
+    <Compile Include="Models\IndeedJobCompanyMappingBusiness.cs" />
+    <Compile Include="Models\JwtokenVeraMedix.cs" />
+    <Compile Include="Models\Jwttoken.cs" />
+    <Compile Include="Models\NewBusinessFburl.cs" />
+    <Compile Include="Models\NonFranchise.cs" />
+    <Compile Include="Models\Package.cs" />
+    <Compile Include="Models\PlayerVideo.cs" />
+    <Compile Include="Models\PlayerVideoQuestion.cs" />
+    <Compile Include="Models\PlayerVideoQuizCongratulationStatus.cs" />
+    <Compile Include="Models\PlayerVideoUserDetails.cs" />
+    <Compile Include="Models\PlayerVideoUserEvents.cs" />
+    <Compile Include="Models\PlayerVideoUserQuestionAnswer.cs" />
+    <Compile Include="Models\ProspactNewContact.cs" />
+    <Compile Include="Models\ProspactNewContact1.cs" />
+    <Compile Include="Models\ProspactNewContactMappingService.cs" />
+    <Compile Include="Models\ProspactNewContactMappingService1.cs" />
+    <Compile Include="Models\ProspactNewContactServices.cs" />
+    <Compile Include="Models\ProspectContactMappingTag.cs" />
+    <Compile Include="Models\ProspectDemoRequest.cs" />
+    <Compile Include="Models\ProspectDemoRequestMappingAnswer.cs" />
+    <Compile Include="Models\ProspectDemoRequestMappingPriorityAnswer.cs" />
+    <Compile Include="Models\ProspectInteraction.cs" />
+    <Compile Include="Models\ProspectInteractionCopy.cs" />
+    <Compile Include="Models\ProspectMailInteraction.cs" />
+    <Compile Include="Models\ProspectMailInteractionCopy.cs" />
+    <Compile Include="Models\ProspectOtherContact.cs" />
+    <Compile Include="Models\ProspectStatusHistory.cs" />
+    <Compile Include="Models\ProspectView.cs" />
+    <Compile Include="Models\ReferralCompany.cs" />
+    <Compile Include="Models\ReferralCompanyCaryFyDocument.cs" />
+    <Compile Include="Models\ReferralCompanyCaryFyDocumentMappingUrl.cs" />
+    <Compile Include="Models\ReferralSource.cs" />
+    <Compile Include="Models\RelyFyAgencyAdvanceBilling.cs" />
+    <Compile Include="Models\RelyFyAgencyInvoiceBilling.cs" />
+    <Compile Include="Models\RelyFyAgencyInvoiceBillingFormula.cs" />
+    <Compile Include="Models\RelyFyAgencyInvoiceBillingMailSent.cs" />
+    <Compile Include="Models\RelyFyAgencyInvoicePayment.cs" />
+    <Compile Include="Models\RelyfyCustomerInformation.cs" />
+    <Compile Include="Models\RelyfyDotNetStagingContext.cs" />
+    <Compile Include="Models\RelyFyFeedbackResponse.cs" />
+    <Compile Include="Models\RelyFyFeedbackResponseMappingCall.cs" />
+    <Compile Include="Models\RelyFyFeedbackResponseMappingMail.cs" />
+    <Compile Include="Models\ReplaceKeyWord.cs" />
+    <Compile Include="Models\Roles.cs" />
+    <Compile Include="Models\SecondDemoInteraction.cs" />
+    <Compile Include="Models\SecondDemoInteractionMeppingSteps.cs" />
+    <Compile Include="Models\SecondDemoQuestion.cs" />
+    <Compile Include="Models\SecondDemoQuestionMappingAnswer.cs" />
+    <Compile Include="Models\SendGridMailReply.cs" />
+    <Compile Include="Models\SendGridWebhookResponse.cs" />
+    <Compile Include="Models\Specialization.cs" />
+    <Compile Include="Models\StateCountyData.cs" />
+    <Compile Include="Models\StatePropertyForEvvInfo.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentAddress.cs" />
+    <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\TaskHistory.cs" />
+    <Compile Include="Models\TempExeImport.cs" />
+    <Compile Include="Models\TempExeImportCounty.cs" />
+    <Compile Include="Models\TempFbpost.cs" />
+    <Compile Include="Models\TestExcelImport.cs" />
+    <Compile Include="Models\TwilioRecordingForProspect.cs" />
+    <Compile Include="Models\UserNotes.cs" />
+    <Compile Include="Models\UserQuestionForSponsor.cs" />
+    <Compile Include="Models\ZipCode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ClientContactPersonRepository.cs" />
+    <Compile Include="Repository\Model\UserNotes.cs" />
+    <Compile Include="Repository\UserNotesRepository.cs" />
+    <Compile Include="Repository\EventRepository.cs" />
+    <Compile Include="Repository\ExceptionLogRepository.cs" />
+    <Compile Include="Repository\IEntity.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\IUnitOfWork.cs" />
+    <Compile Include="Repository\KranumBaseRepository.cs" />
+    <Compile Include="Repository\Model\ClientContactPerson.cs" />
+    <Compile Include="Repository\Model\Event.cs" />
+    <Compile Include="Repository\Model\ExceptionLog.cs" />
+    <Compile Include="Repository\UnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Script\dbscript01.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\KranumWebApi\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\KranumWebApi\packages\Microsoft.Data.SqlClient.SNI.1.1.0\build\net46\Microsoft.Data.SqlClient.SNI.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\KranumWebApi\packages\Microsoft.EntityFrameworkCore.Design.3.1.32\build\net461\Microsoft.EntityFrameworkCore.Design.props')" Text="$([System.String]::Format('$(ErrorText)', '..\KranumWebApi\packages\Microsoft.EntityFrameworkCore.Design.3.1.32\build\net461\Microsoft.EntityFrameworkCore.Design.props'))" />
+    <Error Condition="!Exists('..\KranumWebApi\packages\Microsoft.Extensions.FileProviders.Embedded.2.1.0\build\netstandard2.0\Microsoft.Extensions.FileProviders.Embedded.props')" Text="$([System.String]::Format('$(ErrorText)', '..\KranumWebApi\packages\Microsoft.Extensions.FileProviders.Embedded.2.1.0\build\netstandard2.0\Microsoft.Extensions.FileProviders.Embedded.props'))" />
+    <Error Condition="!Exists('..\KranumWebApi\packages\Microsoft.Extensions.FileProviders.Embedded.2.1.0\build\netstandard2.0\Microsoft.Extensions.FileProviders.Embedded.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\KranumWebApi\packages\Microsoft.Extensions.FileProviders.Embedded.2.1.0\build\netstandard2.0\Microsoft.Extensions.FileProviders.Embedded.targets'))" />
+  </Target>
+  <Import Project="..\KranumWebApi\packages\Microsoft.Extensions.FileProviders.Embedded.2.1.0\build\netstandard2.0\Microsoft.Extensions.FileProviders.Embedded.targets" Condition="Exists('..\KranumWebApi\packages\Microsoft.Extensions.FileProviders.Embedded.2.1.0\build\netstandard2.0\Microsoft.Extensions.FileProviders.Embedded.targets')" />
+</Project>
